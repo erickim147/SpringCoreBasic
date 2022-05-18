@@ -1,4 +1,9 @@
-package hello.SpringCoreBasic.member;
+package hello.SpringCoreBasic;
+
+import hello.SpringCoreBasic.member.Grade;
+import hello.SpringCoreBasic.member.Member;
+import hello.SpringCoreBasic.member.MemberService;
+import hello.SpringCoreBasic.member.MemberServiceImpl;
 
 import java.util.Arrays;
 
