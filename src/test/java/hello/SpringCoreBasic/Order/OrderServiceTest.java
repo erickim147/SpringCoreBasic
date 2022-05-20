@@ -1,4 +1,4 @@
-package Order;
+package hello.SpringCoreBasic.Order;
 
 import hello.SpringCoreBasic.Order.Order;
 import hello.SpringCoreBasic.Order.OrderService;

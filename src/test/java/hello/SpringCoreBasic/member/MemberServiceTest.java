@@ -1,4 +1,4 @@
-package member;
+package hello.SpringCoreBasic.member;
 
 import hello.SpringCoreBasic.member.Grade;
 import hello.SpringCoreBasic.member.Member;
