@@ -3,16 +3,19 @@ package hello.SpringCoreBasic;
 import hello.SpringCoreBasic.Order.Order;
 import hello.SpringCoreBasic.Order.OrderService;
 import hello.SpringCoreBasic.Order.OrderServiceImpl;
-import hello.SpringCoreBasic.member.Grade;
-import hello.SpringCoreBasic.member.Member;
-import hello.SpringCoreBasic.member.MemberService;
-import hello.SpringCoreBasic.member.MemberServiceImpl;
+import hello.SpringCoreBasic.discount.FixDiscountPolicy;
+import hello.SpringCoreBasic.member.*;
 
 public class OrderApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
+
+        //MemberService memberService = new MemberServiceImpl(null);
+        //OrderService orderService = new OrderServiceImpl(null, null);
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);

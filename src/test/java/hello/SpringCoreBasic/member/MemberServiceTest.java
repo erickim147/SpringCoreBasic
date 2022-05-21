@@ -1,15 +1,24 @@
 package hello.SpringCoreBasic.member;
 
+import hello.SpringCoreBasic.AppConfig;
 import hello.SpringCoreBasic.member.Grade;
 import hello.SpringCoreBasic.member.Member;
 import hello.SpringCoreBasic.member.MemberService;
 import hello.SpringCoreBasic.member.MemberServiceImpl;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MemberServiceTest {
 
-    MemberService memberService = new MemberServiceImpl();
+    //MemberService memberService = new MemberServiceImpl();
+    MemberService memberService;
+
+    @BeforeEach
+    public void beforeEach() {
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+    }
 
     @Test
     void join() {
