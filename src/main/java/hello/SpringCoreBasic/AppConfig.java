@@ -9,7 +9,10 @@ import hello.SpringCoreBasic.member.MemberRepository;
 import hello.SpringCoreBasic.member.MemberService;
 import hello.SpringCoreBasic.member.MemberServiceImpl;
 import hello.SpringCoreBasic.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class AppConfig {
 
     // 기존 AppConfig 를 리팩토링 하자
@@ -28,23 +31,35 @@ public class AppConfig {
 //    }
 
     // 변경 로직
+    @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
 
-    private MemberRepository memberRepository() {
+    @Bean
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     // FixDiscountPolicy -> RateDiscountPolicy로 변경해보자.
     // 할인 정책을 변경 하더라도 AppConfig의 등장으로 사용 영역의 코드 변경 없이 적용이 가능하다.
+    @Bean
     public DiscountPolicy discountPolicy() {
         //return new FixDiscountPolicy(); // 정액 할인 정책
         return new RateDiscountPolicy(); // 정률 할인 정책
     }
 
 }
+
+// AppConfig Class를 스프링 타입으로 바꿔보자
+/*
+*   1. Class 위에 @Configuration 애노테이션을 붙여준다.
+*   2. Method에는 @Bean 애노테이션을 붙여준다.
+*
+*
+* */
