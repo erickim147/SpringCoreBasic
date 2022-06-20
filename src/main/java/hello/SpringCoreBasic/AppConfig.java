@@ -33,16 +33,20 @@ public class AppConfig {
     // 변경 로직
     @Bean
     public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
+
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
@@ -62,4 +66,27 @@ public class AppConfig {
 *   2. Method에는 @Bean 애노테이션을 붙여준다.
 *
 *
+* */
+
+/*
+*   @Configuration과 싱글톤
+*
+*   @Bean memberService -> new MemoryMemberRepository()
+*   @Bean orderService -> new MemoryMemberRepository()
+*   이렇게 new MemoryMemberRepository를 생성하면 싱글톤이 깨질까 안깨질까?
+*   결과적으로 각각 다른 2개의 객체를 생성하면 싱글톤이 깨지는 것 처럼 보인다.
+*   여기서 스프링 컨테이너는 어떻게 이 문제를 해결할까?
+*
+*   호출 순서를 보면
+*   // call AppConfig.memberService
+*   // call AppConfig.memberRepository
+*   // call AppConfig.memberRepository
+*   // call AppConfig.orderService
+*   // call AppConfig.memberRepository
+*
+*   순으로 호출이 되어야 한다. 하지만, 실제 실행 결과
+*   // call AppConfig.memberService
+*   // call AppConfig.memberRepository
+*   // call AppConfig.orderService
+*   이렇게 memberRepository는 한번만 호출된다.
 * */
